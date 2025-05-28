@@ -533,10 +533,10 @@ a img:hover {
 ## Lab 3
 
 ### 📄 Opis  
-Prosta aplikacja typu TODO, umożliwiająca dodawanie oraz usuwanie zadań z listy. Użyto czystego JavaScriptu bez frameworków.
+W ramach laboratorium stworzyliśmy prostą stronę internetową o dowolnej tematyce. Strona zawierała podstawowy layout z wykorzystaniem HTML i CSS, w tym: nagłówek (header), pasek nawigacyjny (nav), główną część strony (main) oraz stopkę (footer). Celem ćwiczenia było opanowanie struktury dokumentu HTML oraz zastosowanie CSS do rozmieszczenia i stylizacji elementów.
 
 ### 🔧 Technologie  
-`HTML`, `CSS`, `JavaScript`
+`HTML`, `CSS`
 
 ### 💻 Kod
 
@@ -544,10 +544,104 @@ Prosta aplikacja typu TODO, umożliwiająca dodawanie oraz usuwanie zadań z lis
 <summary><strong>HTML</strong></summary>
 
 ```html
-<h1>Lista zadań</h1>
-<input type="text" id="taskInput" placeholder="Nowe zadanie" />
-<button onclick="addTask()">Dodaj</button>
-<ul id="taskList"></ul>
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twoja Przygoda – Odkryj Świat</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <img id="header-img" src="https://b2ccdn.coraltravel.pl/content/banner/desktop/bannerslide_12032025134349.jpg" alt="Podróże - baner">
+    
+    <header>
+        <h1>Twoja Przygoda – Odkryj Świat z Nami!</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Strona główna</a></li>
+                <li><a href="#about">O nas</a></li>
+                <li><a href="#destinations">Najlepsze kierunki podróży</a></li>
+                <li><a href="#tips">Porady podróżnicze</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home">
+            <h2>Witaj na naszej stronie podróżniczej!</h2>
+            <p>Podróże to nie tylko przemieszczanie się – to styl życia. Odkryj z nami najpiękniejsze miejsca na świecie!</p>
+        </section>
+
+        <section id="about">
+            <h2>O nas</h2>
+            <p>Podróże to nasza pasja! Jesteśmy zespołem miłośników odkrywania świata, którzy chcą dzielić się z Tobą najlepszymi miejscami, poradami i inspiracjami. Dołącz do naszej społeczności i zacznij swoją przygodę!</p>
+        </section>
+
+        <section id="destinations">
+            <h2>Najlepsze kierunki podróży</h2>
+            <article>
+                <h3>Bali – Rajska wyspa pełna magii</h3>
+                <p>Odkryj piękne plaże, tropikalne dżungle i kulturę Bali. Sprawdź najlepsze miejsca do odwiedzenia!</p>
+            </article>
+            <article>
+                <h3>Paryż – Miasto Miłości i Sztuki</h3>
+                <p>Wieża Eiffla, Luwr, kawiarnie i romantyczna atmosfera – zobacz, dlaczego Paryż zachwyca turystów!</p>
+            </article>
+            <article>
+                <h3>Islandia – Kraina lodu i ognia</h3>
+                <p>Gorące źródła, lodowce i zorza polarna – Islandia to miejsce, które musisz zobaczyć na własne oczy!</p>
+            </article>
+        </section>
+
+        <section id="tips">
+            <h2>Porady podróżnicze</h2>
+            <article>
+                <h3>Jak pakować się na każdą podróż?</h3>
+                <p>Sprawdź nasz poradnik minimalisty – co zabrać, a czego unikać!</p>
+            </article>
+            <article>
+                <h3>Najlepsze aplikacje dla podróżników</h3>
+                <p>Mapy offline, przewodniki i tłumacze – oto aplikacje, które ułatwią Ci życie!</p>
+            </article>
+        </section>
+
+        <section id="contact">
+            <h2>Kontakt</h2>
+            <p>Masz pytania? Skontaktuj się z nami! Chętnie pomożemy w zaplanowaniu Twojej wymarzonej podróży.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Twoja Przygoda. Wszystkie prawa zastrzeżone.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const navLinks = document.querySelectorAll("nav ul li a");
+
+            navLinks.forEach(link => {
+                link.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute("href").substring(1);
+                    const targetSection = document.getElementById(targetId);
+
+                    if (targetSection) {
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 50,
+                            behavior: "smooth"
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
 ```
 
 </details>
@@ -556,43 +650,138 @@ Prosta aplikacja typu TODO, umożliwiająca dodawanie oraz usuwanie zadań z lis
 <summary><strong>CSS</strong></summary>
 
 ```css
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#header-img {
+    width: 1000px;
+    height: 300px;
+    object-position: bottom right;
+    object-fit: cover;
+    display: block;
+}
+
 body {
-  font-family: sans-serif;
-  text-align: center;
-  padding: 2em;
+    font-family: Arial, sans-serif;
+    background-color: #e0f7fa; /* Jasny błękit */
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-input {
-  padding: 0.5em;
-}
-button {
-  margin-left: 0.5em;
-}
-ul {
-  list-style: none;
-  padding: 0;
-}
-li {
-  margin: 0.5em 0;
-  cursor: pointer;
-}
-```
 
-</details>
+.container {
+    width: 1000px;
+    max-width: 100%;
+}
 
-<details>
-<summary><strong>JavaScript</strong></summary>
+header {
+    background: #ff7043;
+    color: white;
+    text-align: center;
+    padding: 20px 10px;
+    width: 1000px;
+    height: 125px;
+    max-width: 100%;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
 
-```js
-function addTask() {
-  const input = document.getElementById("taskInput");
-  const task = input.value.trim();
-  if (task) {
-    const li = document.createElement("li");
-    li.textContent = task;
-    li.onclick = () => li.remove();
-    document.getElementById("taskList").appendChild(li);
-    input.value = "";
-  }
+header h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+nav ul li {
+    margin: 5px 0;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 12px 20px;
+    background: #ff9800;
+    border-radius: 8px;
+    transition: background 0.3s, transform 0.2s;
+    display: inline-block;
+}
+
+nav ul li a:hover {
+    background: #fb8c00;
+    transform: scale(1.05);
+}
+
+main {
+    width: 1000px;
+    max-width: 100%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+section {
+    width: 100%;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #fff3e0; /* Kolor piasku */
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+section h2 {
+    font-size: 26px;
+    margin-bottom: 15px;
+    color: #ff7043; /* Ciepły pomarańczowy */
+    border-bottom: 3px solid #ff7043;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+article {
+    background: #ffebee; /* Jasny różowy jak zachód słońca */
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    width: 100%;
+    text-align: left;
+    transition: transform 0.2s;
+}
+
+article:hover {
+    transform: translateY(-5px);
+}
+
+article h3 {
+    color: #d32f2f; /* Czerwony jak zachód słońca */
+    margin-bottom: 8px;
+}
+
+footer {
+    height: 50px;
+    width: 1000px;
+    max-width: 100%;
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    margin-top: 20px;
+    box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.2);
 }
 ```
 
@@ -600,10 +789,9 @@ function addTask() {
 
 ### 🖼️ Podgląd
 
-<img width="1438" alt="Screenshot 2025-05-28 at 21 56 00" src="https://github.com/user-attachments/assets/305b8e36-0122-4a4d-bff4-f7f1659e6984" />
-
-
 <img width="144" alt="Screenshot 2025-05-28 at 21 55 43" src="https://github.com/user-attachments/assets/64a86aa8-855a-42ac-aa95-3fb9cfa8d6b5" />
+
+<img width="1438" alt="Screenshot 2025-05-28 at 21 56 00" src="https://github.com/user-attachments/assets/305b8e36-0122-4a4d-bff4-f7f1659e6984" />
 
 ---
 
