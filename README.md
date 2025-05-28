@@ -42,3 +42,37 @@ Np.
   </header>
 </body>
 </html>
+</details>
+<details>
+<summary><strong>CSS</strong></summary>
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  font-family: sans-serif;
+}
+header, footer {
+  background-color: #333;
+  color: white;
+  padding: 1em;
+  text-align: center;
+}
+main {
+  flex: 1;
+  padding: 2em;
+}
+</details>
+🖼️ Podgląd
+
+Lab 2 — Formularz logowania
+
+📄 Opis
+
+Stworzenie prostego formularza logowania z walidacją po stronie przeglądarki. Formularz sprawdza, czy pola zostały uzupełnione.
+
+🔧 Technologie
+
+HTML, CSS, JavaScript
+
+💻 Kod
