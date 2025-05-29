@@ -11,11 +11,7 @@ Zestawienie wykonanych laboratoriów z przedmiotu JZiS. Każdy wpis zawiera kró
 - [Lab 3](#lab-3)
 - [Lab 4](#lab-4)
 - [Lab 5](#lab-5)
-- [Lab 6](#lab-6)
-- [Lab 7](#lab-7)
-- [Lab 8](#lab-8)
-- [Lab 9](#lab-9)
-- [Lab 10](#lab-10)
+- ➡️ [Przejdź do kolejnej części: documentation2.md](documentation2.md)
 
 ---
 
@@ -1265,4 +1261,8 @@ section#B2{
 ### 🖼️ Podgląd
 
 <img width="1237" alt="Screenshot 2025-04-03 at 09 52 01" src="https://github.com/user-attachments/assets/47f6f2ec-21fe-401b-b1f9-d27d879f898f" />
+
+
+
+➡️ [Przejdź do kolejnej części: documentation2.md](documentation2.md)
 
