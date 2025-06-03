@@ -899,6 +899,7 @@ W tym laboratorium rozszerzyliśmy funkcjonalność formularza o walidację za p
 
 </html>
 ```
+</details>
 
 <details>
 <summary><strong>JavaScript</strong></summary>
@@ -1133,7 +1134,21 @@ function pokaz_wartosc() {
 ## Lab 9
 
 ### 📄 Opis  
-P
+
+Laboratorium poświęcone było walidacji formularzy oraz prostym obliczeniom z wykorzystaniem JavaScript. Składało się z czterech zadań:
+
+1. **Sprawdzenie poprawności logowania**  
+   – Formularz z polami login, hasło i powtórz hasło. Walidacja obejmuje brak danych oraz porównanie haseł.
+
+2. **Obliczanie wartości na podstawie ceny i ilości**  
+   – Formularz, który sprawdza, czy cena i ilość zostały wprowadzone oraz czy są liczbami całkowitymi.
+
+3. **Cena ze zniżką**  
+   – Podobnie jak w zadaniu 2, z tym że po wpisaniu danych i kliknięciu przycisku obliczana jest cena z 30% zniżką.
+
+4. **Formularz z pełną walidacją adresową**  
+   – Rozbudowany formularz zawierający dane adresowe, datę urodzenia i login. Każde pole podlega walidacji, a obok wyświetlany jest komunikat (OK / Błąd / Nie wpisano).
+
 
 ### 🔧 Technologie  
 `HTML`, `CSS`, `JavaScript`
@@ -1141,6 +1156,8 @@ P
 ### 💻 Kod
 
 <details>
+<summary><strong>Zadanie 1</strong></summary>
+   <details>
 <summary><strong>HTML</strong></summary>
 
 ```html
@@ -1166,6 +1183,8 @@ P
 ```
 
 </details>
+</details>
+
 
 ### 🖼️ Podgląd
 
@@ -1174,7 +1193,290 @@ P
 ## Lab 10
 
 ### 📄 Opis  
-P
+
+Celem laboratorium było zapoznanie się z obsługą formularzy i zdarzeń w JavaScript. W skład ćwiczenia wchodziło pięć prostych interaktywnych zadań:
+
+1. **Sprawdzenie pola tekstowego**  
+   – Po kliknięciu przycisku pojawia się komunikat, czy użytkownik wprowadził dane.
+
+2. **Obsługa checkboxów**  
+   – Sprawdzenie, ile opcji zaznaczył użytkownik i odpowiedni komunikat w zależności od liczby zaznaczeń.
+
+3. **Walidacja dwóch pól tekstowych**  
+   – Informacja, czy oba pola zostały uzupełnione, jedno, czy żadne.
+
+4. **Lista rozwijana (select)**  
+   – Użytkownik wybiera kolor z listy, a po kliknięciu przycisku pojawia się nazwa wybranego koloru.
+
+5. **Opcje radiowe (radio)**  
+   – Po zatwierdzeniu wyboru pokazuje się, który wariant został zaznaczony.
+
+### 🔧 Technologie  
+`HTML`, `JavaScript`
+
+### 💻 Kod
+
+<details>
+<summary>HTML <strong>zad 01</strong></summary>
+
+```html
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Formularz danych</title>
+</head>
+
+<body>
+
+  <form id="myForm">
+    <input type="text" id="textInput" placeholder="Wpisz coś...">
+    <button type="submit">Sprawdź</button>
+  </form>
+
+  <p id="message"></p>
+
+  <script>
+    document.getElementById('myForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const input = document.getElementById('textInput').value.trim();
+      const message = document.getElementById('message');
+
+      if (input === "") {
+        message.textContent = "Brak danych";
+      } else {
+        message.textContent = "Wprowadzono dane";
+      }
+    });
+  </script>
+
+</body>
+
+</html>
+```
+
+</details>
+
+<details>
+<summary>HTML <strong>zad 02</strong></summary>
+
+```html
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Formularz danych</title>
+</head>
+
+<body>
+
+  <section>
+    <form id="checkboxForm">
+      <input type="checkbox" id="opc1"> Opcja 1<br>
+      <input type="checkbox" id="opc2"> Opcja 2<br>
+      <input type="checkbox" id="opc3"> Opcja 3<br><br>
+      <button type="submit">Sprawdź</button>
+      <div id="wynik"></div>
+    </form>
+  </section>
+
+  <script>
+    document.getElementById('checkboxForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const opc1 = document.getElementById('opc1').checked;
+      const opc2 = document.getElementById('opc2').checked;
+      const opc3 = document.getElementById('opc3').checked;
+
+      const zaznaczone = [opc1, opc2, opc3].filter(Boolean).length;
+
+      const wynik = document.getElementById('wynik');
+
+      if (zaznaczone === 0) {
+        wynik.textContent = "Nic nie zaznaczono.";
+      } else if (zaznaczone === 3) {
+        wynik.textContent = "Wszystkie opcje zaznaczone.";
+      } else {
+        wynik.textContent = "Zaznaczono niepełny zestaw.";
+      }
+    });
+  </script>
+
+</body>
+
+</html>
+```
+
+</details>
+
+<details>
+<summary>HTML <strong>zad 03</strong></summary>
+
+```html
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Walidacja dwóch pól</title>
+</head>
+
+<body>
+
+  <form id="formDane">
+    <input type="text" id="pole1" placeholder="Pole 1"><br><br>
+    <input type="text" id="pole2" placeholder="Pole 2"><br><br>
+    <button type="submit">Sprawdź</button>
+    <p id="komunikat"></p>
+  </form>
+
+  <script>
+    document.getElementById('formDane').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const p1 = document.getElementById('pole1').value.trim();
+      const p2 = document.getElementById('pole2').value.trim();
+      const komunikat = document.getElementById('komunikat');
+
+      if (p1 === "" && p2 === "") {
+        komunikat.textContent = "Oba pola nie są wypełnione";
+      } else if (p1 === "" || p2 === "") {
+        komunikat.textContent = "Jedno pole nie jest wypełnione";
+      } else {
+        komunikat.textContent = "Oba pola są wypełnione";
+      }
+    });
+  </script>
+
+</body>
+
+</html>
+```
+
+</details>
+
+<details>
+<summary>HTML <strong>zad 04</strong></summary>
+
+```html
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Wybór koloru</title>
+</head>
+
+<body>
+
+  <label for="kolory">Wybierz kolor:</label><br>
+  <select id="kolory">
+    <option value="">-- wybierz --</option>
+    <option value="Czerwony">Czerwony</option>
+    <option value="Zielony">Zielony</option>
+    <option value="Niebieski">Niebieski</option>
+  </select>
+
+  <button id="pokaz">Pokaż wybór</button><br><br>
+  <span id="wynik"></span>
+
+  <script>
+    document.getElementById('pokaz').addEventListener('click', function () {
+      const kolor = document.getElementById('kolory').value;
+      const wynik = document.getElementById('wynik');
+      wynik.textContent = "Wybrano: " + kolor;
+    });
+  </script>
+
+</body>
+
+</html>
+```
+
+</details>
+
+<details>
+<summary>HTML <strong>zad 05</strong></summary>
+
+```html
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Wybór opcję</title>
+</head>
+
+<body>
+
+  <form id="formularzWariant">
+    <p>Wybierz opcję:</p>
+    <input type="radio" id="wariant1" name="wariant" value="Wariant A">
+    <label for="wariant1">Opcja A</label><br>
+
+    <input type="radio" id="wariant2" name="wariant" value="Wariant B">
+    <label for="wariant2">Opcja B</label><br>
+
+    <input type="radio" id="wariant3" name="wariant" value="Wariant C">
+    <label for="wariant3">Opcja C</label><br><br>
+
+    <button type="submit">Zatwierdź</button>
+  </form>
+
+  <div id="wynik"></div>
+
+  <script>
+    document.getElementById('formularzWariant').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const wybrany = document.querySelector('input[name="wariant"]:checked');
+      const wynik = document.getElementById('wynik');
+
+      if (wybrany) {
+        wynik.textContent = "Wybrano: " + wybrany.value;
+      } else {
+        wynik.textContent = "Nie wybrano żadnego wariantu.";
+      }
+    });
+  </script>
+
+</body>
+
+</html>
+```
+
+</details>
+
+### 🖼️ Podgląd
+<img width="363" alt="Screenshot 2025-06-03 at 12 38 03" src="https://github.com/user-attachments/assets/d6257317-61cb-46b9-8b50-58b96cbd240a" />
+
+---
+
+## Lab 11
+
+### 📄 Opis  
+
+Celem laboratorium było przygotowanie do kolokwium poprzez stworzenie kompletnego układu strony internetowej (layoutu) oraz implementację formularza z walidacją po stronie klienta za pomocą JavaScript.
+
+Strona została zaprojektowana zgodnie z podanym wzorem graficznym i składała się z czterech głównych sekcji:
+
+- **Nagłówek (`header`)** – stała wysokość 80px, pełna szerokość (1000px),
+- **Panel środkowy (`main`)** – zawierał formularz z polami do wypełnienia,
+- **Panel boczny (`aside`)** – dodatkowe informacje, np. linki lub ogłoszenia,
+- **Stopka (`footer`)** – o takich samych wymiarach jak nagłówek.
+
+Layout strony był statyczny i wyśrodkowany w przeglądarce, o wymiarach 1000 × 600 pikseli.
+
+Formularz w panelu głównym zawierał pola:
+
+- imię (tekst),
+- email (adres e-mail),
+- wiek (liczba całkowita 1–120),
+- PESEL (dokładnie 11 cyfr),
+- przycisk „Wyślij”.
 
 ### 🔧 Technologie  
 `HTML`, `CSS`, `JavaScript`
@@ -1185,7 +1487,58 @@ P
 <summary><strong>HTML</strong></summary>
 
 ```html
+<!DOCTYPE html>
+<html lang="pl">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lab 11</title>
+    <link rel="stylesheet" href="css/style.css">
+     <script src="js/script.js"></script> 
+</head>
+
+<body>
+
+    <content>
+        <header>
+            <h1>Rozbudowany Formularz</h1>
+        </header>
+
+        <main>
+            <h2>Dane uzytkownika</h2>
+            <form action="" method="post">
+                <label for="name">Imię:</label>
+                <input type="text" id="name" name="name">
+                <label for="nameError"></label>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email">
+                <label for="emailError"></label>
+
+                <label for="age">Wiek:</label>
+                <input type="number" id="age" name="age">
+                <label for="ageError"></label>
+
+                <label for="pesel">PESEL:</label>
+                <input type="number" id="pesel" name="pesel">
+                <label for="peselError"></label>
+
+                <button type="submit">Wyślij</button>
+            </form>
+        </main>
+        <aside>
+            <h3>Panel boczny</h3>
+            <p>Mozesz tu dodac np. informacje kontaktowe, linki lub ogtoszenia.</p>
+        </aside>
+        <footer>
+            <p>Stopka strony - przyktadowy tekst</p>
+        </footer>
+    </content>
+
+</body>
+
+</html>
 ```
 
 </details>
@@ -1194,7 +1547,99 @@ P
 <summary><strong>CSS</strong></summary>
 
 ```css
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+content {
+    display: grid;
+    grid-template-columns: 666px 334px;
+    grid-template-rows: 80px 440px 80px;
+    grid-template-areas:
+        "header header"
+        "main aside"
+        "footer footer";
+    box-shadow: #505947 0px 0px 10px;
+}
+
+/* === HEADER === */
+
+header {
+    grid-area: header;
+    background-color: #4F709C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* === MAIN === */
+
+main {
+    grid-area: main;
+    padding: 2rem;
+}
+
+main h2 {
+    margin-bottom: 1rem;
+}
+
+form {
+    display: grid;
+    grid-template-columns: auto 1fr 1fr;
+    gap: 0.5rem 1rem;
+    align-items: center;
+    max-width: 600px;
+}
+
+label:not([for$="Error"]) {
+    font-weight: bold;
+}
+
+input {
+    padding: 0.5rem;
+    border: 1px solid #aaa;
+    font-size: 1rem;
+    width: 200px;
+}
+
+label[for$="Error"] {
+    font-size: 0.85rem;
+    color: red;
+    min-height: 1em;
+}
+
+button {
+    padding: 0.75rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    background-color: #c0c0c0;
+}
+
+/* === ASIDE === */
+aside {
+    grid-area: aside;
+    background-color: #BF7F5A;
+    padding: 20px;
+}
+
+/* === FOOTER === */
+footer {
+    grid-area: footer;
+    background-color: #505947;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 ```
 
 </details>
@@ -1203,9 +1648,70 @@ P
 <summary><strong>JavaScript</strong></summary>
 
 ```js
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
 
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        let valid = true;
+
+        clearErrors()
+
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const age = document.getElementById("age").value.trim();
+        const pesel = document.getElementById("pesel").value.trim();
+
+        if (name === "") {
+            valid = false;
+            showError("nameError", "Imię jest wymagane");
+        }
+
+        if (email === "") {
+            valid = false;
+            showError("emailError", "Email jest wymagany");
+        }
+
+        const ageNum = parseInt(age);
+        if (!Number.isInteger(ageNum) || ageNum < 1 || ageNum > 120) {
+            valid = false;
+            showError("ageError", "Wiek musi być liczbą całkowitą od 1 do 120");
+        }
+
+        if (!/^\d{11}$/.test(pesel)) {
+            valid = false;
+            showError("peselError", "PESEL musi zawierać dokładnie 11 cyfr");
+        }
+
+        if (valid) {
+            alert(`Dane użytkownika:
+                - Imię: ${name}
+                - Email: ${email}
+                - Wiek: ${ageNum}
+                - PESEL: ${pesel}`);
+        }
+    });
+
+    function showError(labelId, message) {
+        const label = document.querySelector(`label[for="${labelId}"]`);
+        label.textContent = message;
+        label.style.color = "red";
+        label.style.fontSize = "0.9em";
+    }
+    function clearErrors() {
+        const errorLabels = ["nameError", "emailError", "ageError", "peselError"];
+        errorLabels.forEach(id => {
+            const label = document.querySelector(`label[for="${id}"]`);
+            if (label) label.textContent = "";
+        });
+    }
+});
 ```
 
 </details>
 
 ### 🖼️ Podgląd
+<img width="1101" alt="Screenshot 2025-06-03 at 12 33 54" src="https://github.com/user-attachments/assets/f344d738-dc89-4c7e-95c6-0381c9fdda2b" />
+<img width="1090" alt="Screenshot 2025-06-03 at 12 34 12" src="https://github.com/user-attachments/assets/2ea531dc-8040-4ba5-aa4c-2a01f2accdbe" />
+
+---
