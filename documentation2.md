@@ -12,6 +12,7 @@ Zestawienie wykonanych laboratoriów z przedmiotu JZiS. Każdy wpis zawiera kró
 - [Lab 8](#lab-8)
 - [Lab 9](#lab-9)
 - [Lab 10](#lab-10)
+- [Lab 10](#lab-11)
 
 ---
 
