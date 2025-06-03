@@ -940,7 +940,7 @@ function pokaz_wartosc() {
 
 </details>
 
-# kalkulator 
+### kalkulator 
 <details>
 <summary><strong>HTML</strong></summary>
 
@@ -1125,8 +1125,10 @@ function pokaz_wartosc() {
 
 ### 🖼️ Podgląd
 <img width="990" alt="Screenshot 2025-06-03 at 12 22 24" src="https://github.com/user-attachments/assets/4bd5935e-5e2d-4cbb-b6b8-1774d4514209" />
-<img width="591" alt="Screenshot 2025-06-03 at 12 24 40" src="https://github.com/user-attachments/assets/18c2bb34-df21-48d3-b861-dfb71e81b1c6" />
-<img width="570" alt="Screenshot 2025-06-03 at 12 24 57" src="https://github.com/user-attachments/assets/27a2ae7a-918d-4e32-8f67-42f148299adf" />
+
+|   |   |
+| ----------- | ----------- |
+| <img width="591" alt="Screenshot 2025-06-03 at 12 24 40" src="https://github.com/user-attachments/assets/18c2bb34-df21-48d3-b861-dfb71e81b1c6" />| <img width="570" alt="Screenshot 2025-06-03 at 12 24 57" src="https://github.com/user-attachments/assets/27a2ae7a-918d-4e32-8f67-42f148299adf" />   |
 
 
 ---
@@ -1161,7 +1163,40 @@ Laboratorium poświęcone było walidacji formularzy oraz prostym obliczeniom z 
 <summary><strong>HTML</strong></summary>
 
 ```html
+<!DOCTYPE html>
+<html lang="pl">
 
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="skrypty.js"></script>
+</head>
+
+<body>
+
+    <form>
+        <label for="login">Login:</label><br>
+        <input type="text" id="login" name="login" required><br><br>
+
+        <label for="haslo">Hasło:</label><br>
+        <input type="password" id="haslo" name="haslo" required><br><br>
+
+        <label for="potwierdz">Potwierdź hasło:</label><br>
+        <input type="password" id="potwierdz" name="potwierdz" required><br><br>
+
+    </form>
+    <button id="sprawdz" onclick="akcja()">Sprawdź</button>
+
+    <div id="wyniki">
+        <div id="wynik1"></div>
+        <div id="wynik2"></div>
+        <div id="wynik3"></div>
+        <div id="wynik4"></div>
+    </div>
+
+</body>
+
+</html>
 ```
 
 </details>
@@ -1170,7 +1205,74 @@ Laboratorium poświęcone było walidacji formularzy oraz prostym obliczeniom z 
 <summary><strong>CSS</strong></summary>
 
 ```css
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
 
+form {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 90%;
+    padding: 8px;
+    margin-top: 4px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #0078d7;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 20px 0;
+}
+
+button:hover {
+    background-color: #005fa3;
+}
+
+#wynik1, #wynik2, #wynik3 {
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+#wynik1, #wynik2, #wynik3 {
+    color: red;
+}
+
+#wynik4 {
+    color: green;
+}
+
+
+#wyniki {
+    width: 200px;
+    padding: 10px;
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #f0f0f0;
+    border: 2px inset #ccc;
+    border-radius: 8px;
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2),
+                inset -2px -2px 5px rgba(255, 255, 255, 0.5);
+}
 ```
 
 </details>
@@ -1179,15 +1281,463 @@ Laboratorium poświęcone było walidacji formularzy oraz prostym obliczeniom z 
 <summary><strong>JavaScript</strong></summary>
 
 ```js
+function akcja() {
+    const login = document.getElementById('login').value.trim();
+    const haslo = document.getElementById('haslo').value.trim();
+    const potwierdz = document.getElementById('potwierdz').value.trim();
 
+    const wynik1 = document.getElementById('wynik1');
+    const wynik2 = document.getElementById('wynik2');
+    const wynik3 = document.getElementById('wynik3');
+    const wynik4 = document.getElementById('wynik4');
+
+    wynik1.textContent = '';
+    wynik2.textContent = '';
+    wynik3.textContent = '';
+    wynik4.textContent = '';
+
+    let blad = false;
+
+    if (login === '') {
+        wynik1.textContent = 'Brak loginu';
+        blad = true;
+    }
+
+    if (haslo === '') {
+        wynik2.textContent = 'Brak hasła';
+        blad = true;
+    }
+
+    if (potwierdz === '') {
+        wynik3.textContent = 'Brak potwierdzenia hasła';
+        blad = true;
+    }
+
+    if (!blad) {
+        if (haslo !== potwierdz) {
+            wynik3.textContent = 'Hasła są różne';
+        } else {
+            wynik4.textContent = 'Hasła są identyczne';
+        }
+    }
+}
 ```
 
 </details>
 </details>
 
+<details>
+<summary><strong>Zadanie 2</strong></summary>
+    <details>
+    <summary><strong>HTML</strong></summary>
+
+```html
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="js/skrypty.js"></script>
+</head>
+
+
+<body>
+
+    <form>
+        <label for="liczba1">Podaj liczbę 1:</label><br>
+        <input type="text" id="liczba1" name="liczba1" required><br><br>
+
+        <label for="liczba2">Podaj liczbę 2:</label><br>
+        <input type="text" id="liczba2" name="liczba2" required><br><br>
+
+    </form>
+
+    <button id="sprawdz" onclick="akcja()">Sprawdź</button>
+    <div id="wynik"></div>
+
+</body>
+
+</html>
+```
+</details>
+
+<details>
+    <summary><strong>CSS</strong></summary>
+
+```css
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+form {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"]{
+    width: 90%;
+    padding: 8px;
+    margin-top: 4px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #0078d7;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 20px 0;
+}
+
+button:hover {
+    background-color: #005fa3;
+}
+
+#wynik {
+    height: 20px;
+    width: 200px;
+    padding: 10px;
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #f0f0f0;
+    border: 2px inset #ccc;
+    border-radius: 8px;
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2),
+                inset -2px -2px 5px rgba(255, 255, 255, 0.5);
+}
+```
+</details>
+
+<details>
+    <summary><strong>JavaScript</strong></summary>
+
+```js
+function akcja() {
+    const liczba1 = document.getElementById('liczba1').value.trim();
+    const liczba2 = document.getElementById('liczba2').value.trim();
+    const wynik = document.getElementById('wynik');
+
+    wynik.textContent = '';
+
+    if (liczba1 === '' || liczba2 === '') {
+        wynik.textContent = 'Wpisz obie liczby.';
+        return;
+    }
+
+    const a = parseFloat(liczba1);
+    const b = parseFloat(liczba2);
+
+    if (isNaN(a) || isNaN(b)) {
+        wynik.textContent = 'Wprowadź prawidłowe liczby.';
+        return;
+    }
+
+    const suma = a + b;
+    wynik.textContent = `${a} + ${b} = ${suma}`;
+}
+```
+</details>
+</details>
+
+
+
+<details>
+<summary><strong>Zadanie 3</strong></summary>
+    <details>
+    <summary><strong>HTML</strong></summary>
+
+    ```html
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="js/skrypty.js"></script>
+</head>
+
+
+<body>
+
+    <form>
+        <label for="liczba1">cena:</label><br>
+        <input type="text" id="liczba1" name="liczba1" required><br><br>
+
+        <label for="liczba2">ilość:</label><br>
+        <input type="text" id="liczba2" name="liczba2" required><br><br>
+
+        <input type="checkbox" id="wybrano"><span>zniżka 30%</span>   
+
+    </form>
+
+    <button id="sprawdz" onclick="akcja()">Sprawdź</button>
+    <div id="wynik"></div>
+
+</body>
+
+</html>
+    ```
+</details>
+
+<details>
+    <summary><strong>CSS</strong></summary>
+
+    ```css
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+form {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"]{
+    width: 90%;
+    padding: 8px;
+    margin-top: 4px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #0078d7;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 20px 0;
+}
+
+button:hover {
+    background-color: #005fa3;
+}
+
+#wynik {
+    height: 20px;
+    width: 200px;
+    padding: 10px;
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #f0f0f0;
+    border: 2px inset #ccc;
+    border-radius: 8px;
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2),
+                inset -2px -2px 5px rgba(255, 255, 255, 0.5);
+}
+    ```
+</details>
+
+<details>
+    <summary><strong>JavaScript</strong></summary>
+
+    ```js
+function akcja() {
+    const liczba1 = document.getElementById('liczba1').value.trim();
+    const liczba2 = document.getElementById('liczba2').value.trim();
+    const wybrano = document.getElementById('wybrano');
+    const wynik = document.getElementById('wynik');
+
+    wynik.textContent = '';
+
+    if (liczba1 === '' || liczba2 === '') {
+        wynik.textContent = 'Wpisz obie liczby.';
+        return;
+    }
+
+    const a = parseFloat(liczba1);
+    const b = parseFloat(liczba2);
+
+    if (isNaN(a) || isNaN(b)) {
+        wynik.textContent = 'Wprowadź prawidłowe liczby.';
+        return;
+    }
+
+    if (!wybrano.checked) {
+        const suma = a * b;
+        wynik.textContent = `${suma}`;
+    } else {
+        const suma = (a * b) * 0.7;
+        wynik.textContent = `${suma}`;
+    }
+}
+    ```
+</details>
+</details>
+
+<details>
+<summary><strong>Zadanie 4</strong></summary>
+    <details>
+    <summary><strong>HTML</strong></summary>
+
+    ```html
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="js/skrypty.js"></script>
+</head>
+
+
+<body>
+
+    <form>
+        <label>Login:</label>
+        <input type="text" id="login">
+        <div id="loginInfo"></div><br>
+
+        <label>Data urodzenia (DD-MM-RRRR):</label>
+        <input type="text" id="data">
+        <div id="dataInfo"></div><br>
+
+        <label>Ulica:</label>
+        <input type="text" id="ulica">
+        <div id="ulicaInfo"></div><br>
+
+        <label>Nr domu:</label>
+        <input type="text" id="dom">
+        <div id="domInfo"></div><br>
+
+        <label>Nr lokalu:</label>
+        <input type="text" id="lokal">
+        <div id="lokalInfo"></div><br>
+
+        <label>Kod pocztowy (XX-XXX):</label>
+        <input type="text" id="kod">
+        <div id="kodInfo"></div><br>
+
+        <label>Miasto:</label>
+        <input type="text" id="miasto">
+        <div id="miastoInfo"></div><br>
+
+    </form>
+
+    <button id="sprawdz" onclick="waliduj()">Sprawdź</button>
+
+</body>
+
+</html>
+    ```
+</details>
+
+<details>
+    <summary><strong>CSS</strong></summary>
+
+    ```css
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+form {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"]{
+    width: 90%;
+    padding: 8px;
+    margin-top: 4px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #0078d7;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 20px 0;
+}
+
+button:hover {
+    background-color: #005fa3;
+}
+    ```
+</details>
+
+<details>
+    <summary><strong>JavaScript</strong></summary>
+
+    ```js
+function waliduj() {
+  sprawdzPole("login", val => val !== "", "Nie wpisano");
+  sprawdzPole("data", val => /^\d{2}-\d{2}-\d{4}$/.test(val), "Błąd");
+  sprawdzPole("ulica", val => val !== "", "Nie wpisano");
+  sprawdzPole("dom", val => val !== "", "Nie wpisano");
+  sprawdzPole("lokal",  val => val !== "", "Nie wpisano");
+  sprawdzPole("kod", val => /^\d{2}-\d{3}$/.test(val), "Błąd");
+  sprawdzPole("miasto", val => val !== "", "Nie wpisano");
+}
+
+function sprawdzPole(id, walidacja, komunikatBledu = "Nie wpisano") {
+  const el = document.getElementById(id);
+  const info = document.getElementById(id + "Info");
+  const wartosc = el.value.trim();
+
+  if (wartosc === "" && komunikatBledu !== "Błąd") {
+    info.textContent = komunikatBledu;
+    info.style.color = "red";
+  } else if (!walidacja(wartosc)) {
+    info.textContent = komunikatBledu;
+    info.style.color = "red";
+  } else {
+    info.textContent = "OK";
+    info.style.color = "green";
+  }
+}
+    ```
+</details>
+</details>
 
 ### 🖼️ Podgląd
 
+|             |         |
+|-------------|---------|
+| <img width="471" alt="Screenshot 2025-06-03 at 13 00 42" src="https://github.com/user-attachments/assets/8f3891ea-b286-493a-a4e2-3518c4b002cd" /> | <img width="456" alt="Screenshot 2025-06-03 at 13 00 59" src="https://github.com/user-attachments/assets/40959eb5-409e-43b6-99ae-583dda006c71" /> |
+| <img width="475" alt="Screenshot 2025-06-03 at 13 01 58" src="https://github.com/user-attachments/assets/7c94a06b-0f82-4ed9-b19c-f9c5dfa560cb" /> | <img width="447" alt="Screenshot 2025-06-03 at 13 02 17" src="https://github.com/user-attachments/assets/97086b89-8069-43af-b126-8933ad28eedd" /> |
+| <img width="544" alt="Screenshot 2025-06-03 at 13 02 34" src="https://github.com/user-attachments/assets/f083b76a-e7ca-47fc-8534-d583efbcd89e" /> | <img width="451" alt="Screenshot 2025-06-03 at 13 02 46" src="https://github.com/user-attachments/assets/aca35de1-5909-46a1-8574-154dc170c8c7" /> |
+| <img width="434" alt="Screenshot 2025-06-03 at 13 03 04" src="https://github.com/user-attachments/assets/31d82a12-d45d-4e53-acaa-bc857fad47f2" /> | <img width="407" alt="Screenshot 2025-06-03 at 13 03 43" src="https://github.com/user-attachments/assets/a9839381-0f60-4d9f-a7a8-2779f95a7d65" /> |
 ---
 
 ## Lab 10
