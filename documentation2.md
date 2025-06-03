@@ -779,7 +779,18 @@ section.data {
 ## Lab 8
 
 ### 📄 Opis  
-P
+
+W tym laboratorium rozszerzyliśmy funkcjonalność formularza o walidację za pomocą JavaScript oraz dynamiczne wyświetlanie danych. Ćwiczenie składało się z trzech zadań:
+
+1. **Walidacja pól formularza (wersja podstawowa)**  
+   – Sprawdzenie, czy wszystkie pola tekstowe zostały wypełnione. Jeśli tak, po kliknięciu przycisku „Zapisz”, dane zostają wyświetlone obok pól.
+
+2. **Walidacja rozszerzona**  
+   – Oprócz poprzednich pól formularza dodano walidację m.in. dla: serii i numeru dowodu, kodu pocztowego, numeru domu.
+
+3. **Kalkulator pierwiastków równania kwadratowego**  
+   – Formularz do wprowadzenia współczynników równania kwadratowego oraz obliczenia pierwiastków.
+
 
 ### 🔧 Technologie  
 `HTML`, `CSS`, `JavaScript`
@@ -790,7 +801,180 @@ P
 <summary><strong>HTML</strong></summary>
 
 ```html
+<!DOCTYPE html>
+<html lang="pl">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twoja Przygoda – Odkryj Świat</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <img id="header-img" src="https://b2ccdn.coraltravel.pl/content/banner/desktop/bannerslide_12032025134349.jpg"
+        alt="Podróże - baner">
+
+    <header>
+        <h1>Twoja Przygoda – Odkryj Świat z Nami!</h1>
+        <nav>
+            <a href="index.html">Strona główna</a>
+            <a href="Podstrona1.html">Najlepsze kierunki podróży</a>
+            <a href="Podstrona2.html">Porady podróżnicze</a>
+            <a href="formularz.html">formularz</a>
+        </nav>
+    </header>
+
+    <!--    Formularz    -->
+
+    <main>
+        <section>
+            <h2>WNIOSEK</h2>
+            <form>
+
+                <section class="data">
+                    <label for="data">Data wypełnienia wniosku</label>
+                    <input type="date" id="data" name="data_wniosku">
+                </section>
+
+                <fieldset>
+                    <legend>1. Dane wniosku i dowodu</legend>
+                    <label for="nr_wniosku">Numer wniosku</label>
+                    <input type="text" id="nr_wniosku" name="nr_wniosku"><br>
+
+                    <label for="seria">Seria dowodu i numer dowodu</label>
+                    <input type="text" id="seria" name="seria_dowodu" class="seria">
+                
+                    <label for="numer_dowodu">-</label>
+                    <input type="text" id="numer_dowodu" name="numer_dowodu">
+                </fieldset>
+
+                <fieldset>
+                    <legend>2. Dane posiadacza dowodu</legend>
+                    <label for="pesel">Numer PESEL</label>
+                    <input type="text" id="pesel" name="pesel"><span id="pesel-out"></span><br>
+
+                    <label for="nazwisko">Nazwisko</label>
+                    <input type="text" id="nazwisko" name="nazwisko"><span id="nazwisko-out"></span><br>
+
+                    <label for="imie">Imię</label>
+                    <input type="text" id="imie" name="imie"><span id="imie-out"></span><br>
+
+                    <label for="ulica">Ulica</label>
+                    <input type="text" id="ulica" name="ulica"><span id="ulica-out"></span><br>
+
+                    <label for="nr_domu">Nr domu / mieszkania</label>
+                    <input type="text" id="nr_domu" name="nr_domu"><br>
+
+                    <label for="kod">Kod pocztowy</label>
+                    <input type="text" id="kod" name="kod"><br>
+
+                    <label for="miasto">Miasto</label>
+                    <input type="text" id="miasto" name="miasto"><span id="miasto-out"></span><br>
+
+                    <label for="email">e-mail</label>
+                    <input type="email" id="email" name="email"><br>
+                </fieldset>
+
+                <label for="email_odbioru">3. Informacja odbioru - email</label>
+                <input type="checkbox" id="email_odbioru" name="email_odbioru"><br><br>
+
+                <button type="button" onclick="pokaz_wartosc()" >Zapisz</button>
+            </form>
+
+            <p id="odp_for"></p>
+        </section>
+    </main>
+
+
+    </fieldset>
+
+    <footer>
+        <p>© 2025 Twoja Przygoda. Wszystkie prawa zastrzeżone.</p>
+    </footer>
+
+</body>
+
+<script src="script.js"></script>
+
+</html>
+```
+
+<details>
+<summary><strong>JavaScript</strong></summary>
+
+```js
+
+
+function pokaz_wartosc() {
+    const inputy = document.querySelectorAll('form input[type="text"], form input[type="email"], form input[type="date"]');
+    let nieWypelnione = [];
+
+    inputy.forEach(input => {
+        if (input.value.trim() === "") {
+            nieWypelnione.push(input.name || input.id);
+        }
+    });
+
+    if (nieWypelnione.length > 0) {
+        alert("Uzupełnij wszystkie pola! Brakuje: " + nieWypelnione.join(", "));
+        return;
+    }
+
+    // Jeśli wszystko wypełnione – można kontynuować
+    document.getElementById("odp_for").innerHTML = "Wszystko poprawnie wypełnione!";
+
+    const pola = ['pesel', 'nazwisko', 'imie', 'ulica', 'miasto'];
+    pola.forEach(id => {
+        const input = document.getElementById(id);
+        const out = document.getElementById(id + '-out');
+        out.textContent = ` → ${input.value}`;
+    });
+}
+
+
+
+
+```
+
+</details>
+
+# kalkulator 
+<details>
+<summary><strong>HTML</strong></summary>
+
+```html
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Równanie Kwadratowe</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+    <section class="form-container">
+        <h2>Rozwiązywanie równania kwadratowego</h2>
+        <form>
+            <label for="a">Współczynnik a:</label>
+            <input type="text" id="a" placeholder="np. 1" />
+
+            <label for="b">Współczynnik b:</label>
+            <input type="text" id="b" placeholder="np. -5" />
+
+            <label for="c">Współczynnik c:</label>
+            <input type="text" id="c" placeholder="np. 6" />
+
+            <input type="button" id="przycisk" value="Oblicz" onclick="pokaz_wartosc()" />
+        </form>
+
+        <div id="wynik" class="wynik-pole">Tutaj pojawi się wynik...</div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
 ```
 
 </details>
@@ -799,7 +983,89 @@ P
 <summary><strong>CSS</strong></summary>
 
 ```css
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #b2fefa, #0ed2f7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.form-container {
+    background-color: #ffffffdd;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 420px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+form label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+form input[type="text"]:focus {
+    border-color: #009688;
+    outline: none;
+}
+
+input[type="button"] {
+    margin-top: 20px;
+    width: 100%;
+    background-color: #007c91;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="button"]:hover {
+    background-color: #00bcd4;
+}
+
+.wynik-pole {
+    margin-top: 25px;
+    padding: 15px;
+    background-color: #e0f2f1;
+    border-left: 5px solid #007c91;
+    border-radius: 8px;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.blad {
+    color: #d32f2f;
+    font-weight: bold;
+}
 ```
 
 </details>
@@ -808,12 +1074,59 @@ P
 <summary><strong>JavaScript</strong></summary>
 
 ```js
+function pokaz_wartosc() {
+    const a = parseFloat(document.getElementById('a').value.trim());
+    const b = parseFloat(document.getElementById('b').value.trim());
+    const c = parseFloat(document.getElementById('c').value.trim());
 
+    const wynikDiv = document.getElementById("wynik");
+
+    if (isNaN(a) || isNaN(b) || isNaN(c)) {
+        wynikDiv.innerHTML = `<span class="blad">Wszystkie pola muszą zawierać poprawne liczby!</span>`;
+        return;
+    }
+
+    if (a === 0) {
+        wynikDiv.innerHTML = `<span class="blad">To nie jest równanie kwadratowe (a ≠ 0)!</span>`;
+        return;
+    }
+
+    const delta = b * b - 4 * a * c;
+    let x1, x2;
+
+    if (delta > 0) {
+        x1 = (-b + Math.sqrt(delta)) / (2 * a);
+        x2 = (-b - Math.sqrt(delta)) / (2 * a);
+        wynikDiv.innerHTML = `
+            <strong>Δ = ${delta.toFixed(2)}</strong><br>
+            Dwa miejsca zerowe:<br>
+            x₁ = ${x1.toFixed(2)}<br>
+            x₂ = ${x2.toFixed(2)}
+        `;
+    } else if (delta === 0) {
+        x1 = -b / (2 * a);
+        wynikDiv.innerHTML = `
+            <strong>Δ = ${delta.toFixed(2)}</strong><br>
+            Jedno miejsce zerowe:<br>
+            x = ${x1.toFixed(2)}
+        `;
+    } else {
+        wynikDiv.innerHTML = `
+            <strong>Δ = ${delta.toFixed(2)}</strong><br>
+            Brak miejsc zerowych w zbiorze liczb rzeczywistych.
+        `;
+    }
+}
 ```
 
 </details>
 
+
 ### 🖼️ Podgląd
+<img width="990" alt="Screenshot 2025-06-03 at 12 22 24" src="https://github.com/user-attachments/assets/4bd5935e-5e2d-4cbb-b6b8-1774d4514209" />
+<img width="591" alt="Screenshot 2025-06-03 at 12 24 40" src="https://github.com/user-attachments/assets/18c2bb34-df21-48d3-b861-dfb71e81b1c6" />
+<img width="570" alt="Screenshot 2025-06-03 at 12 24 57" src="https://github.com/user-attachments/assets/27a2ae7a-918d-4e32-8f67-42f148299adf" />
+
 
 ---
 
