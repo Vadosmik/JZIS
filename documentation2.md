@@ -2265,3 +2265,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <img width="1090" alt="Screenshot 2025-06-03 at 12 34 12" src="https://github.com/user-attachments/assets/2ea531dc-8040-4ba5-aa4c-2a01f2accdbe" />
 
 ---
+
+
+
+- ⬅️ [Wróć do poprzedniej części: documentation1.md](documentation1.md)
